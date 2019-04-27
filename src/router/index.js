@@ -50,13 +50,13 @@ export const constantRouterMap = [
   },
   // 带左侧导航面板
   {
-    path: '/dashboard',
+    path: '/',
     component: Layout,
     children: [
       {
         path: 'home',
         component: dashboardPage,
-        name: 'Dashboard',
+        name: 'home',
         meta: { title: '首页', icon: 'dashboard', noCache: true }
       }
     ]
