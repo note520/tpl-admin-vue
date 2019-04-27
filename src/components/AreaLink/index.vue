@@ -258,9 +258,14 @@
         this.currentCity = null;
         this.currentBlock = null;
         this.currentProvince = this.province.find(item=>item['orgAreaId'] === this.provinceId);
-        this.outPutAreaLink();
+        if(this.isShowAll){
+          this.outPutAreaLink('选省');
+        }
         await this.getCityData(this.provinceId,!!e);
         await this.getBlockData(this.cityId,!!e);
+        if(!this.isShowAll){
+          this.outPutAreaLink('选省');
+        }
       },
       // 选市
       choseCity:async function(e) {
@@ -269,14 +274,15 @@
         this.blockId = '';
         this.currentBlock = null;
         await this.getBlockData(this.cityId,!!e);
-        this.outPutAreaLink()
+        this.outPutAreaLink('选市')
       },
       // 选区
       choseBlock:function(e) {
         this.currentBlock = this.block.find(item=>item['orgAreaId'] === e);
-        this.outPutAreaLink()
+        this.outPutAreaLink('选区')
       },
-      outPutAreaLink:function () {
+      outPutAreaLink:function (tips) {
+        console.log('outPutAreaLink:',tips);
         const data = {
           province:{
             ...this.currentProvince,
