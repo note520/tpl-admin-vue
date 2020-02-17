@@ -1,6 +1,6 @@
 # tpl-admin-vue
 
-#### tm-cli [工具文档]（http://4g.gitee.io/tm-cli/）
+#### tm-cli [工具文档](http://4g.gitee.io/tm-cli/)
 
 ## 目录结构
 ```
