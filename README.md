@@ -3,7 +3,7 @@
 #### tm-cli [工具文档](http://4g.gitee.io/tm-cli/)
 
 #### 环境版本要求
-- tm-cli v0.2.0-beta.9 +
+- tm-cli v0.2.0-beta.10 +
 - node v10.15.3 +
 - npm v6.4.1
 - vue 2.5.17
