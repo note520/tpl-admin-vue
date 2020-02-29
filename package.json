@@ -6,37 +6,43 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run dev",
-    "start:mock": "cross-env MOCK_ENV=open tm s",
-    "dev": "tm start",
-    "build": "tm build",
+    "mock": "tm mock -s -d ./mock -p 8900",
+    "dev": "tm s",
+    "build": "tm b && npm run build:url",
+    "lint": "eslint --quiet --ext .js,.vue src",
+    "lintfix": "eslint --quiet --fix --ext .js,.vue src",
     "build:union": "tm build -e union",
     "build:test": "tm build -e test",
-    "mock": "anywhere -s -d ./mock"
+    "build:url": "tm url -d ./doc"
   },
   "dependencies": {
+    "@xsyx/x-monitor-web": "^0.1.1",
     "axios": "^0.18.0",
     "element-ui": "2.4.11",
     "js-cookie": "^2.2.0",
+    "lodash": "^4.17.11",
+    "moment": "^2.24.0",
     "normalize.css": "7.0.0",
     "nprogress": "0.2.0",
     "path-to-regexp": "^3.0.0",
     "qs": "^6.6.0",
     "vue": "2.5.17",
     "vue-router": "3.0.1",
-    "vuex": "3.0.1"
+    "vuex": "3.0.1",
+    "vue-ueditor-wrap": "^2.4.1"
   },
   "devDependencies": {
+    "babel-eslint": "^10.0.3",
     "cross-env": "^5.2.0",
-    "mockjs": "^1.0.1-beta3",
-    "node-sass": "^4.7.2",
-    "nodemon": "^1.18.9",
+    "eslint": "^6.7.2",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-html": "^6.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-vue": "^6.0.1",
+    "node-sass": "^4.13.1",
     "sass-loader": "^7.1.0",
     "svg-sprite-loader": "3.8.0",
-    "svgo": "1.0.5"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/note520/tpl-admin-vue.git"
+    "svgo": "^1.0.5"
   },
   "license": "ISC",
   "browserslist": [
