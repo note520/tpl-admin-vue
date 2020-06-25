@@ -3,7 +3,6 @@
  */
 import { Message } from "element-ui";
 import store from "@/store";
-import { IS_DEV_ENV } from "@/config/constants";
 import log from "@/common/plugin/log";
 import { showLoading, hideLoading } from "@/common/plugin/fetch/loading";
 
