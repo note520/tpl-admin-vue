@@ -1,15 +1,18 @@
 module.exports = {
   // 开发环境-配置方式1
   "devServer":{
-    //"port": 9090,
+      // "port": 9090,
+      // "open":false,
+      // "host":"0.0.0.0",
+      // "useLocalIp":true,
     "proxy": {
       '/api': {
           "target": "http://10.0.75.1:8900",
           "pathRewrite": {
-              // '^/api': '',
-              '^/api': '_api',// 配合本地 tm mock 命令配置
+              '^/api': '',
           },
           "changeOrigin": true // target是域名的话，需要这个参数，
+          // logLevel:'debug' //能够显示代理访问的URL，检查代理配置是否正确
           // "secure": false,  // 使用的是https，会有安全校验，所以设置secure为false
       }
     },
