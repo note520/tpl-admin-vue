@@ -1,28 +1,27 @@
 module.exports = {
-  "env": {
-    "browser": true,
-    "commonjs": true,
-    "es6": true
+  env: {
+    browser: true,
+    commonjs: true,
+    es6: true,
   },
-  "extends": [
-    "plugin:vue/essential",
-    "airbnb-base",
-  ],
-  "parserOptions": {
-    "parser": "babel-eslint"
+  extends: ["plugin:vue/essential", "airbnb-base","plugin:prettier/recommended"],
+  parserOptions: {
+    parser: "babel-eslint",
+    ecmaFeatures: {
+      jsx: true,
+    },
   },
   // vue 的关键配置
-  "plugins":[
-    "html",
-    "vue",
-  ],
-  "globals": {
-    "wx": true,
-    "getApp": true,
-    "$":true,
-    "Vue":true
+  plugins: ["html", "vue"],
+  globals: {
+    wx: true,
+    qq: true,
+    "qq.maps": true,
+    $: true,
+    Vue: true,
+    getApp: true,
   },
-  "rules": {
+  rules: {
     "arrow-body-style": [0],
     "class-methods-use-this": [0],
     "consistent-return": [0],
@@ -48,6 +47,24 @@ module.exports = {
     "no-use-before-define": [0],
     "no-useless-escape": [0],
     "prefer-template": [0],
-    "require-yield": [1]
-  }
+    "require-yield": [1],
+
+    "no-shadow": [
+      "error",
+      { builtinGlobals: false, hoist: "functions", allow: ["e", "state"] },
+    ],
+    "no-unused-expressions": [
+      0,
+      {
+        allowShortCircuit: true,
+        allowTernary: true,
+      },
+    ],
+    "max-len": [0],
+    "vue/singleline-html-element-content-newline": [0],
+    "vue/multiline-html-element-content-newline": [0],
+    "vue/no-unused-vars": "off",
+    camelcase: ["warn", { ignoreDestructuring: true }],
+    "prefer-destructuring": ["error", { object: true, array: false }],
+  },
 };
