@@ -1,6 +1,6 @@
-# tm-element-admin
+# tpl-admin-vue
 
-中后台 vue+element+kylin+tm-cli 系统模板项目
+中后台 vue+element+tm-cli 系统模板项目
 
 #### node 环境安装必要工具：tm-cli [工具文档](http://4g.gitee.io/tm-cli/)
 
