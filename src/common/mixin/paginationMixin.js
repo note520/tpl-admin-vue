@@ -18,5 +18,9 @@ export default {
       this.page.num = page;
       this.getList();
     },
+    // 刷新
+    handleRefresh() {
+      this.getList();
+    },
   },
 };

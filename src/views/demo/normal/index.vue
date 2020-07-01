@@ -16,7 +16,12 @@
       <data-table :list="list" />
 
       <template v-slot:footer>
-        <he-table-pagination />
+        <he-table-pagination
+          :page="page"
+          @sizeChange="handleSizeChange"
+          @currentChange="handleCurrentChange"
+          @onRefresh="handleRefresh"
+        />
       </template>
     </he-table-layout>
     <!--弹窗区域-->
@@ -24,6 +29,7 @@
 </template>
 
 <script>
+import { dialogMixin, paginationMixin } from "@/common/mixin";
 import api from "@/api";
 import dataFilter from "./data-filter";
 import dataTable from "./data-table";
@@ -34,8 +40,10 @@ export default {
     dataFilter,
     dataTable,
   },
+  mixins: [dialogMixin, paginationMixin],
   data() {
     return {
+      filterForm: {}, // 接收查询条件参数对象
       list: [
         {
           productName: "商品商品商品商品商品商品商品商品1",
@@ -130,7 +138,27 @@ export default {
   mounted() {
     console.warn("==api===", api);
   },
-  methods: {},
+  methods: {
+    /** **表格*** */
+    // 请求列表固定用getList方法，因为分页组件事件会调用
+    async getList() {
+      try {
+        // todo 参数转换处理
+        const params = {
+          ...this.filterForm,
+          // 页码
+          page: this.page.num,
+          // 记录数
+          pageSize: this.page.size,
+        };
+        const res = await this.$api.demoApi.cancelList(params);
+        this.list = res.rows || [];
+        this.page.total = res.total || 0;
+      } catch (e) {
+        this.$log.error(e, "getList");
+      }
+    },
+  },
 };
 </script>
 
