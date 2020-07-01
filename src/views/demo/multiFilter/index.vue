@@ -10,9 +10,9 @@
       <template v-slot:footer>
         <he-table-pagination
           :page="page"
-          @sizeChange="onSizeChange"
-          @currentChange="onCurrentChange"
-          @onRefresh="onRefreshPageSize"
+          @sizeChange="handleSizeChange"
+          @currentChange="handleCurrentChange"
+          @onRefresh="handleRefresh"
         />
       </template>
     </he-table-layout>
@@ -53,6 +53,7 @@ export default {
   mixins: [dialogMixin, paginationMixin],
   data() {
     return {
+      filterForm: {}, // 接收data-filter组件值
       list: [
         {
           rows: 10,
@@ -99,16 +100,33 @@ export default {
   methods: {
     /** **查询条件*** */
     async onQueryFilter(filter) {
-      console.log(filter);
+      // 可能需要数据转换
+      this.queryFilterList(filter);
     },
     async onResetFilter(filter) {
-      console.log(filter);
+      // 可能需要数据转换
+      this.queryFilterList(filter);
+    },
+    // 同步查询条件-列表
+    queryFilterList(filter) {
+      this.filterForm = filter;
+      this.getList();
     },
     /** **表格*** */
-    async getList(params = {}) {
+    // 请求列表固定用getList方法，因为分页组件事件会调用
+    async getList() {
       try {
+        // todo 参数转换处理
+        const params = {
+          ...this.filterForm,
+          // 页码
+          page: this.page.num,
+          // 记录数
+          pageSize: this.page.size,
+        };
         const res = await this.$api.demoApi.cancelList(params);
         this.list = res.rows || [];
+        this.page.total = res.total || 0;
       } catch (e) {
         this.$log.error(e, "getList");
       }
@@ -123,16 +141,6 @@ export default {
           break;
         default:
       }
-    },
-    // 表格分页 todo 请求列表
-    onSizeChange(page) {
-      console.log("=onSizeChange=", page);
-    },
-    onCurrentChange(page) {
-      console.log("=onCurrentChange=", page);
-    },
-    onRefreshPageSize(page) {
-      console.log("=onRefreshPageSize=", page);
     },
     /** **弹窗添加编辑*** */
     onDetail(item) {
