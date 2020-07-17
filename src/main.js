@@ -8,7 +8,7 @@ import "./assets/styles/index.scss"; // global css
 import "@xsyx/x-monitor-web";
 // 组件
 import HanzoElement from "@xsyx/hanzo-element";
-import "@xsyx/hanzo-element/dist/hanzo.min.css";
+import "@xsyx/hanzo-element/dist/hanzo-element.css";
 import App from "./App";
 import router from "./router";
 import store from "./store";

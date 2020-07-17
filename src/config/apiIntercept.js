@@ -84,12 +84,15 @@ export function interceptRequestFail(error) {
  */
 export async function interceptResponseSuccess(response) {
   // console.warn('--------interceptResponseSuccess--------',response);
-  // todo api 错误拦截以及过滤配置
-  // todo 登陆过期判断
   // dataAxios 是 axios 返回数据中的 data
   const dataAxios = response.data;
   // 这个状态码是和后端约定的,code为非success是抛错 可结合自己业务进行修改
   const { code } = dataAxios;
+  // todo 根据实际 统一业务错误信息拦截(要求后端api返回格式一致) config $ignore:true 拦截器忽略错误
+  if (dataAxios.rspCode && dataAxios.rspCode === "fail") {
+    errorCreate(`${dataAxios.rspDesc || "业务返回错误"} ！`);
+    return false;
+  }
   // todo 根据实际系统 code 进行判断
   if (code === undefined) {
     // 如果没有 code 代表这不是项目后端开发的接口
